@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="chat-container mx-auto" style="max-width: 920px; border-radius: 22px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); background: white;">
+        
+        <div class="chat-header p-4 text-white d-flex align-items-center" 
+             style="background: linear-gradient(to right, #0096be, #8792fe);">
+            <h4 class="mb-0 fw-bold">{{ titulo }}</h4>
+        </div>
+
+        <div class="chat-body p-5" style="background: white; min-height: 400px; color: #666666;">
+            <p style="font-size: 1.1rem; line-height: 1.7;">{{ contenido }}</p>
+            
+            <!-- Botón Volver -->
+            <div class="text-center mt-5">
+                <a href="{% url 'dashboard' %}" 
+                   class="btn px-5 py-3" 
+                   style="background: #00acdf; color: white; border-radius: 50px; font-weight: 600;">
+                    ← Volver al menú principal
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-3 fw-bold mb-4">Bienvenido a Django Notes</h1>
+    <p class="lead mb-5">Gestiona tus tareas de forma simple y moderna</p>
+    <div class="d-grid gap-3 col-6 mx-auto">
+        <a href="{% url 'signin' %}" class="btn btn-primary btn-lg">Iniciar Sesión</a>
+        <a href="{% url 'signup' %}" class="btn btn-success btn-lg">Registrarse</a>
+    </div>
+</div>
+{% endblock %}

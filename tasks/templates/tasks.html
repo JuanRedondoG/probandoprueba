@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <h2 class="text-center mb-5 text-white fw-bold">
+                {% if not tasks.0.datecompleted %}Tareas Pendientes{% else %}Tareas Completadas{% endif %}
+            </h2>
+
+            {% if tasks %}
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for task in tasks %}
+                    <div class="col">
+                        <div class="card h-100 shadow" style="background: #16213e; border: none;">
+                            <div class="card-body">
+                                <h5 class="card-title text-white d-flex justify-content-between align-items-center">
+                                    {{ task.title }}
+                                    {% if task.important %}<span class="text-warning fs-3">★</span>{% endif %}
+                                </h5>
+                                <p class="card-text text-white">{{ task.description|truncatechars:120 }}</p>
+                                <small class="text-light">
+                                    Creado: {{ task.created|date:"d/m/Y H:i" }}
+                                </small>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between">
+                                <a href="{% url 'task_detail' task.id %}" 
+                                   class="btn btn-outline-light btn-sm">Ver / Editar</a>
+                                
+                                {% if not task.datecompleted %}
+                                    <form action="{% url 'complete_task' task.id %}" method="POST" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success btn-sm">Completar</button>
+                                    </form>
+                                {% endif %}
+                                
+                                <form action="{% url 'delete_task' task.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info text-center py-4">
+                    <h5 class="text-white">
+                        No tienes tareas 
+                        {% if not tasks.0.datecompleted %}pendientes{% else %}completadas{% endif %} 
+                        aún.
+                    </h5>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

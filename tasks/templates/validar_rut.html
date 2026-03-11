@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="chat-container mx-auto" style="max-width: 920px; border-radius: 22px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); background: white;">
+        
+        <!-- CABECERA -->
+        <div class="chat-header p-4 text-white d-flex align-items-center" 
+             style="background: linear-gradient(to right, #0096be, #8792fe);">
+            <h4 class="mb-0 fw-bold">Validar 3 tipos de RUT</h4>
+        </div>
+
+        <!-- CUERPO -->
+        <div class="chat-body p-5" style="background: white; color: #666666;">
+            
+            <form method="POST" class="row g-4">
+                {% csrf_token %}
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">RUT 1 (Natural)</label>
+                    <input type="text" name="rut1" class="form-control" placeholder="12345678-9" 
+                           style="border: 2px solid #00acdf; border-radius: 12px;">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">RUT 2 (Empresa)</label>
+                    <input type="text" name="rut2" class="form-control" placeholder="12345678-9" 
+                           style="border: 2px solid #00acdf; border-radius: 12px;">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">RUT 3 (Provisional)</label>
+                    <input type="text" name="rut3" class="form-control" placeholder="12345678-9" 
+                           style="border: 2px solid #00acdf; border-radius: 12px;">
+                </div>
+                
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn px-5 py-3" 
+                            style="background: #c1272d; color: white; border-radius: 50px; font-weight: 600; font-size: 1.1rem;">
+                        Validar los 3 RUT
+                    </button>
+                </div>
+            </form>
+
+            {% if resultados %}
+            <h5 class="mt-5 text-center fw-bold" style="color: #666666;">Resultados de validación:</h5>
+            <div class="row g-3 mt-3">
+                {% for res in resultados %}
+                <div class="col-md-4">
+                    <div class="p-4 rounded" style="background: #f8f9fa; border: 2px solid #00acdf; border-radius: 16px;">
+                        <strong>RUT:</strong> {{ res.rut }}<br>
+                        <strong>Tipo:</strong> {{ res.tipo }}<br>
+                        <strong>Estado:</strong> 
+                        <span style="color: #00acdf; font-weight: bold;" 
+                              class="{% if not res.valido %}text-danger{% endif %}">
+                            {{ res.mensaje }}
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="text-center mt-5">
+                <a href="{% url 'dashboard' %}" 
+                   class="btn px-5 py-3" 
+                   style="background: #00acdf; color: white; border-radius: 50px; font-weight: 600;">
+                    ← Volver al menú principal
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

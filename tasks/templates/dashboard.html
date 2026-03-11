@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="chat-container mx-auto" style="max-width: 920px; border-radius: 22px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); background: white;">
+        
+        <!-- CABECERA -->
+        <div class="chat-header p-4 text-white d-flex align-items-center" 
+             style="background: linear-gradient(to right, #0096be, #8792fe);">
+            <h4 class="mb-0 fw-bold">💬 Chat de Ayuda CESFAM</h4>
+        </div>
+
+        <!-- CUERPO CHAT -->
+        <div class="chat-body p-4" style="background: white; height: 560px; overflow-y: auto; position: relative;">
+
+            <div class="d-flex mb-4">
+                <div style="width: 48px; height: 48px; background: #00acdf; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px;">
+                    🏥
+                </div>
+                <div class="ms-3">
+                    <div style="background: #f0f0f0; padding: 14px 20px; border-radius: 20px 20px 20px 6px; max-width: 80%; color: #666666; line-height: 1.5;">
+                        ¡Hola! Soy el asistente virtual del CESFAM.<br>
+                        Selecciona una opción para ayudarte:
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9 OPCIONES -->
+            <div class="row g-3">
+                <div class="col-md-6"><a href="{% url 'opcion' 1 %}" class="chat-option">1. Datos CESFAM del paciente</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 2 %}" class="chat-option">2. Rut definitivo / Validar 3 tipos de RUT</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 3 %}" class="chat-option">3. Profesionales preferidos</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 4 %}" class="chat-option">4. Cambiar profesionales bloqueados</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 5 %}" class="chat-option">5. Consultar hora reservada</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 6 %}" class="chat-option">6. Detalle de hora médica</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 7 %}" class="chat-option">7. Solicitar hora</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 8 %}" class="chat-option">8. Solicitar grabación</a></div>
+                <div class="col-md-6"><a href="{% url 'opcion' 9 %}" class="chat-option">9. ¿Problemas con la app?</a></div>
+            </div>
+
+            <!-- IMAGEN SVG (cambia el nombre si es necesario) -->
+            <img src="{% static 'img/chatbot.svg' %}" 
+                 alt="Ayuda CESFAM" 
+                 style="position: absolute; bottom: 25px; left: 30px; width: 110px; opacity: 0.9;">
+
+        </div>
+
+        <div class="p-3 text-center" style="background: #f8f9fa; border-top: 2px solid #bfbfbf;">
+            <small style="color: #666666;">Haz clic en cualquier opción • Marco rojo #c1272d usado en botones importantes</small>
+        </div>
+    </div>
+</div>
+
+<style>
+.chat-option {
+    display: block; padding: 16px 20px; background: white; border: 2px solid #00acdf;
+    border-radius: 16px; color: #666666; font-weight: 500; text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,172,223,0.12); transition: all 0.2s;
+}
+.chat-option:hover { background: #f0f8ff; transform: translateY(-2px); border-color: #0096be; }
+</style>
+{% endblock %}
